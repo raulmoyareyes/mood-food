@@ -28,6 +28,11 @@ const actions = {
       return `Ouch! I love ${parameters.ingredient}! In fact, I have found ${data.count} recipes. Tell me how many ingredients must the recipe have.`;
     });
   },
+  'input.select_diet': (request) => {
+    let parameters = request.body.result.parameters;
+    let inputContexts = request.body.result.contexts;
+    console.log(inputContexts);
+  },
   'input.ingredients_count': parameters => {
       return simpleMessage(`To be completed...`);
   },
