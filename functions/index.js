@@ -29,8 +29,9 @@ function processV1Request (request, response) {
   const message = actionHandlers[action](parameters);
   const Http = require('./utils/http')
 
-  Http.getTest().then(test => {
-    console.log('request:', test)
-    sendResponse(message, response); // Send simple response to user
+  Http.search(parameters.ingredient).then(data => {
+    console.log('request:', data)
+    
+    sendResponse(message + ', I find ' + data.count, response); // Send simple response to user
   })
 }
