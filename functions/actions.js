@@ -26,7 +26,7 @@ const actions = {
     let parameters = request.body.result.parameters;
     let inputContexts = request.body.result.contexts;
     console.log('parameters:', parameters);
-    return simpleMessage('I agree with your decision. ')
+    return simpleMessage('I agree with your decision. Which will be the main ingredient of your meal?')
   },
   'input.ingredients_count': request => {
       let parameters = request.body.result.parameters;
@@ -36,7 +36,7 @@ const actions = {
       return Http.searchWithIngredientsCount(ingredientContext.parameters.ingredient, ingredientsCount).then(data => {
           if(data && data.hits && data.hits[0]) {
             const recipe = data.hits[0].recipe;
-            return `I've found your recipe! ${recipe.label}`;
+            return `I've found your recipe! It is ${recipe.label}`;
           }
           return 'No recipes found :(...';
       });
