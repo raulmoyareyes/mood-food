@@ -25,5 +25,5 @@ function processV1Request (request, response) {
     action = 'default';
   }
   // Run the proper handler function to handle the request from Dialogflow
-  actionHandlers[action](response);
+  actionHandlers[action](parameters, response);
 }

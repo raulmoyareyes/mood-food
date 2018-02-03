@@ -10,6 +10,9 @@ const actions = {
   'input.greeting': (response) => {
       sendResponse('I\'m Mood Food with cleaned code!', response); // Send simple response to user
   },
+  'input.ingredient': (parameters, response) => {
+      sendResponse(`Ouch! I love ${parameters.ingredient}!`, response);
+  },
   'default': (response) => {
       let responseToUser = {
         speech: 'This message is from Dialogflow\'s Cloud Functions for Firebase editor!', // spoken response
