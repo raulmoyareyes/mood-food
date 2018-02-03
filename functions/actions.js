@@ -19,30 +19,25 @@ const actions = {
   },
   'input.ingredient': (request) => {
     let parameters = request.body.result.parameters;
-    let inputContexts = request.body.result.contexts;
+    // let inputContexts = request.body.result.contexts;
 
     return Http.search(parameters.ingredient).then(data => {
-      console.log('request:', data);
-      console.log('context:', inputContexts);
-      console.log('parameters:', parameters);
-
       return `Ouch! I love ${parameters.ingredient}! In fact, I have found ${data.count} recipes. Tell me how many ingredients must the recipe have.`;
     });
   },
   'input.select_diet': (request) => {
     let parameters = request.body.result.parameters;
     let inputContexts = request.body.result.contexts;
-    console.log(inputContexts);
     return simpleMessage('This is placeholder for "input.select_diet"')
   },
   'input.ingredients_count': request => {
       let parameters = request.body.result.parameters;
       let inputContexts = request.body.result.contexts;
       const ingredientsCount = parameters.ingredients_count;
-      const ingredient = searchContextByName(inputContexts, 'ingredient');
-      return Http.searchWithIngredientsCount(ingredient, ingredientsCount).then(data => {
-          const recipe = data && data.hits && data.hits[0] || 'No recipes found :(...'
-          return `${recipe}`;
+      const ingredientContext = searchContextByName(inputContexts, 'ingredient');
+      return Http.searchWithIngredientsCount(ingredientContext.parameters.ingredient, ingredientsCount).then(data => {
+          const recipe = data && data.hits ? data.hits[0] : 'No recipes found :(...';
+          return `I've found your recipe! ${recipe.label}`;
       });
   },
   'default': (_) => {
