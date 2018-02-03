@@ -17,8 +17,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 */
 function processV1Request (request, response) {
   let action = request.body.result.action; // https://dialogflow.com/docs/actions-and-parameters
-  let parameters = request.body.result.parameters; // https://dialogflow.com/docs/actions-and-parameters
-  // let inputContexts = request.body.result.contexts; // https://dialogflow.com/docs/contexts
 
   const actionHandlers = require('./actions');
   // If undefined or unknown action use the default handler
@@ -26,12 +24,8 @@ function processV1Request (request, response) {
     action = 'default';
   }
   // Run the proper handler function to handle the request from Dialogflow
-  const message = actionHandlers[action](parameters);
-  const Http = require('./utils/http')
+  actionHandlers[action](request).then(message => {
+    sendResponse(message, response); // Send simple response to user
+    });
 
-  Http.search(parameters.ingredient).then(data => {
-    console.log('request:', data)
-    
-    sendResponse(message + ', I find ' + data.count, response); // Send simple response to user
-  })
 }
