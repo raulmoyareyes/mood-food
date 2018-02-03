@@ -27,6 +27,10 @@ function processV1Request (request, response) {
   }
   // Run the proper handler function to handle the request from Dialogflow
   const message = actionHandlers[action](parameters);
+  const Http = require('./utils/http')
 
-  sendResponse(message, response); // Send simple response to user
+  Http.getTest().then(test => {
+    console.log('request:', test)
+    sendResponse(message, response); // Send simple response to user
+  })
 }

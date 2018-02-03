@@ -1,3 +1,5 @@
+const Http = require('./utils/http')
+
 const actions = {
   'input.welcome': (_) => {
       return 'Hello, Welcome to my Dialogflow agent!';
