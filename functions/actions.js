@@ -29,6 +29,10 @@ const actions = {
     });
   },
   'input.ingredients_count': parameters => {
+      let parameters = request.body.result.parameters;
+      let inputContexts = request.body.result.contexts;
+      const ingredientsCount = parameters.ingredients_count;
+      const ingredient = inputContexts
       return simpleMessage(`To be completed...`);
   },
   'default': (_) => {
