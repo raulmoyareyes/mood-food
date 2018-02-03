@@ -1,5 +1,6 @@
 'use strict';
 
+const sendResponse = require('./utils/send-response');
 const functions = require('firebase-functions'); // Cloud Functions for Firebase library
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
@@ -25,5 +26,7 @@ function processV1Request (request, response) {
     action = 'default';
   }
   // Run the proper handler function to handle the request from Dialogflow
-  actionHandlers[action](parameters, response);
+  const message = actionHandlers[action](parameters);
+
+  sendResponse(message, response); // Send simple response to user
 }
