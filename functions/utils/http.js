@@ -14,14 +14,12 @@ class Http {
     })
   }
 
-  static search(ingredient, userDiet) {
-    let diet = userDiet || 'balanced';
-
-    return this._httpCall(`search?q=${ ingredient }&app_id=79e076d0&app_key=90321d7811d7ae9301373768f758d26a&diet=${diet}`, { method: 'GET', body: 'a=1' })
+  static search(ingredient, userDiet='balanced') {
+    return this._httpCall(`search?q=${ ingredient }&app_id=79e076d0&app_key=90321d7811d7ae9301373768f758d26a&diet=${userDiet}`, { method: 'GET', body: 'a=1' })
   }
 
-  static searchWithIngredientsCount(diet='low-fat', ingredient, ingredientsCount) {
-    return this._httpCall(`search?q=${ ingredient }&diet=${ diet }&ingr=${ingredientsCount}&app_id=79e076d0&app_key=90321d7811d7ae9301373768f758d26a`, { method: 'GET', body: 'a=1' })
+  static searchWithIngredientsCount(ingredient, ingredientsCount, userDiet='balanced') {
+    return this._httpCall(`search?q=${ ingredient }&diet=${ userDiet }&ingr=${ingredientsCount}&app_id=79e076d0&app_key=90321d7811d7ae9301373768f758d26a`, { method: 'GET', body: 'a=1' })
   }
 }
 

@@ -1,4 +1,5 @@
 const Http = require('./utils/http');
+const searchContextByName = require('./utils/search-context');
 
 const simpleMessage = message => {
   return new Promise(resolve => {
@@ -32,13 +33,17 @@ const actions = {
     let parameters = request.body.result.parameters;
     let inputContexts = request.body.result.contexts;
     console.log(inputContexts);
+    return simpleMessage('This is placeholder for "input.select_diet"')
   },
-  'input.ingredients_count': parameters => {
+  'input.ingredients_count': request => {
       let parameters = request.body.result.parameters;
       let inputContexts = request.body.result.contexts;
       const ingredientsCount = parameters.ingredients_count;
-      const ingredient = inputContexts
-      return simpleMessage(`To be completed...`);
+      const ingredient = searchContextByName(inputContexts, 'ingredient');
+      return Http.searchWithIngredientsCount(ingredient, ingredientsCount).then(data => {
+          const recipe = data && data.hits && data.hits[0] || 'No recipes found :(...'
+          return `${recipe}`;
+      });
   },
   'default': (_) => {
       return simpleMessage({
