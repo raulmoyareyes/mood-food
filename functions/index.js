@@ -47,9 +47,9 @@ function processV1Request (request, response) {
     'input.greeting': () => {
       // Use the Actions on Google lib to respond to Google requests; for other requests use JSON
       if (requestSource === googleAssistantRequest) {
-        sendGoogleResponse('I\'m Mood Food!'); // Send simple response to user
+        sendGoogleResponse('I\'m Mood Food again!'); // Send simple response to user
       } else {
-        sendResponse('I\'m Mood Food!'); // Send simple response to user
+        sendResponse('I\'m Mood Food again!'); // Send simple response to user
       }
     },
     // Default handler for unknown or undefined actions

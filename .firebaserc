@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "tete": "hackaton-things",
+    "default": "hackaton-things"
+  }
+}
