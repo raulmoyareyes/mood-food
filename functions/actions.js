@@ -14,21 +14,19 @@ const actions = {
   'input.unknown': (_) => {
       return simpleMessage('I\'m having trouble, can you try that again?');
   },
-  'input.greeting': (_) => {
-      return simpleMessage('I\'m Mood Food with cleaned code!');
-  },
   'input.ingredient': (request) => {
     let parameters = request.body.result.parameters;
     // let inputContexts = request.body.result.contexts;
 
     return Http.search(parameters.ingredient).then(data => {
-      return `Ouch! I love ${parameters.ingredient}! In fact, I have found ${data.count} recipes. Tell me how many ingredients must the recipe have.`;
+      return `Oh! I love ${parameters.ingredient}! In fact, I have found ${data.count} recipes. Tell me how many ingredients must the recipe have.`;
     });
   },
   'input.select_diet': (request) => {
     let parameters = request.body.result.parameters;
     let inputContexts = request.body.result.contexts;
-    return simpleMessage('This is placeholder for "input.select_diet"')
+    console.log('parameters:', parameters);
+    return simpleMessage('I agree with your decision. ')
   },
   'input.ingredients_count': request => {
       let parameters = request.body.result.parameters;
