@@ -36,9 +36,9 @@ const actions = {
       return Http.searchWithIngredientsCount(ingredientContext.parameters.ingredient, ingredientsCount).then(data => {
           if(data && data.hits && data.hits[0]) {
             const recipe = data.hits[0].recipe;
-            return `I've found your recipe! It is ${recipe.label}`;
+            return `I've found your recipe! It is ${recipe.label}. Do you want me to send it to you via email?`;
           }
-          return 'No recipes found :(...';
+          return 'Sorry. I have found no recipes with that criteria.';
       });
   },
   'default': (_) => {
