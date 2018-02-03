@@ -36,8 +36,11 @@ const actions = {
       const ingredientsCount = parameters.ingredients_count;
       const ingredientContext = searchContextByName(inputContexts, 'ingredient');
       return Http.searchWithIngredientsCount(ingredientContext.parameters.ingredient, ingredientsCount).then(data => {
-          const recipe = data && data.hits ? data.hits[0] : 'No recipes found :(...';
-          return `I've found your recipe! ${recipe.label}`;
+          if(data && data.hits && data.hits[0]) {
+            const recipe = data.hits[0].recipe;
+            return `I've found your recipe! ${recipe.label}`;
+          }
+          return 'No recipes found :(...';
       });
   },
   'default': (_) => {
